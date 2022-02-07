@@ -1,0 +1,5 @@
+*.out
+*.o
+*.txt
+main.c
+.vscode
