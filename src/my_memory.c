@@ -7,12 +7,6 @@
 
 #include "my_memory.h"
 
-void **base(void)
-{
-    static void *base_block = NULL;
-    return &base_block;
-}
-
 t_block find_block(t_block *last, size_t size)
 {
     t_block block = *base();
@@ -27,13 +21,6 @@ t_block find_block(t_block *last, size_t size)
     *ptr = (*last)->free ? *last : *ptr;
     *ptr = first_free ? first_free : *ptr;
     return block;
-}
-
-void *get_ptr(void *ptr)
-{
-    if (*base() && ptr < sbrk(0) && ptr == (get_block(ptr))->ptr)
-        return get_block(ptr);
-    return NULL;
 }
 
 t_block init_base(size_t size, pthread_mutex_t mutex)

@@ -13,13 +13,14 @@
 
 SOURCE = 	src/my_memory.c	\
 			src/my_block.c	\
-			src/my_alloc.c
+			src/my_alloc.c	\
+			src/my_base.c
 SOURCE_TEST = 	tests/tests_my_memory.c
 OBJS = $(SOURCE:.c=.o)
 OBJS_TEST = $(SOURCE_TEST:.c=.o)
 NAME = libmy_malloc.so
 CC = gcc
-CFLAGS = -W -Wall -Wshadow -Wextra -I./includes/ -fPIC
+CFLAGS = -W -Wall -Wshadow -Wextra -I./includes/ -fPIC -lpthread
 LDLIBS = -lcriterion -L. -l:$(NAME) -Wl,-rpath,./ -ldl
 LDFLAGS = -shared
 

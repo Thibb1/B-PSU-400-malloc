@@ -43,6 +43,13 @@ void *calloc(size_t nmemb, size_t size);
 void *realloc(void *ptr, size_t size);
 void *reallocarray(void *ptr, size_t nmemb, size_t size);
 
+// base block
+void **base(void);
+void *get_ptr(void *ptr);
+
+// page size util
+size_t get_page_size(size_t size);
+
 // block functions
 t_block find_block(t_block *last, size_t size);
 t_block extend_heap(t_block last, size_t size);
@@ -50,8 +57,5 @@ void split_block(t_block block, size_t size);
 t_block fusion(t_block block);
 t_block get_block(void *ptr);
 void copy_block(t_block src, t_block dst);
-void *get_ptr(void *ptr);
-
-size_t get_page_size(size_t size);
 
 #endif /* !MY_MEMORY_H_ */

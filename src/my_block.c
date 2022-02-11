@@ -7,14 +7,6 @@
 
 #include "my_memory.h"
 
-size_t get_page_size(size_t size)
-{
-    int ps = getpagesize();
-    size_t pages = size / ps ? (size / ps) + (size % ps) : 2;
-
-    return ps * (pages + (pages % 2 != 0));
-}
-
 t_block extend_heap(t_block last, size_t size)
 {
     t_block block = last ? last : sbrk(0);
@@ -44,7 +36,6 @@ void split_block(t_block block, size_t size)
     if (new_block->next)
         new_block->next->prev = new_block;
 }
-
 
 t_block fusion(t_block block)
 {
