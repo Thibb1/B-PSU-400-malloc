@@ -11,10 +11,11 @@
 #
 #####################################################
 
-SOURCE = 	src/my_memory.c	\
-			src/my_block.c	\
-			src/my_alloc.c	\
-			src/my_base.c
+SOURCE = 	src/my_block.c		\
+			src/my_free.c		\
+			src/my_malloc.c		\
+			src/my_metadata.c	\
+			src/my_realloc.c
 SOURCE_TEST = 	tests/tests_my_memory.c
 OBJS = $(SOURCE:.c=.o)
 OBJS_TEST = $(SOURCE_TEST:.c=.o)
