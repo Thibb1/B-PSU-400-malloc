@@ -54,7 +54,7 @@ void *realloc(void *ptr, size_t size)
 
 void *reallocarray(void *ptr, size_t nmemb, size_t size)
 {
-   return realloc(ptr, nmemb * size);
+    return realloc(ptr, nmemb * size);
 }
 
 void *calloc(size_t nmemb, size_t size)
