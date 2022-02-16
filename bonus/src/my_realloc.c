@@ -22,7 +22,7 @@ void *my_realloc(void *ptr, size_t size)
     t_block block = GET_BLOCK(ptr);
     void *new_ptr = NULL;
 
-    ASSERT_RET_VAL(block->size < size, ptr);
+    ASSERT_RET_VAL(block->size <= size, ptr);
     ASSERT_RET_VAL(block->next, grow_block(block, size));
     if (block->next->free &&
         (block->size + BLOCK_SIZE + block->next->size) >= size) {
@@ -40,7 +40,6 @@ void *my_realloc(void *ptr, size_t size)
 
 void *realloc(void *ptr, size_t size)
 {
-    ASSERT_RET(size != 0);
     ASSERT_RET_VAL(ptr, malloc(size));
     if (size == 0) {
         free(ptr);
