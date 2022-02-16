@@ -23,3 +23,16 @@ void split_block(t_block block, size_t size)
     if (*my_base() < new_block)
         *my_base() = new_block;
 }
+
+t_block fusion(t_block block)
+{
+    if (block->free && *my_base() > block)
+        *my_base() = block;
+    if (block->next && block->next->free) {
+        block->size += block->next->size + BLOCK_SIZE;
+        block->next = block->next->next;
+        if (block->next)
+            block->next->prev = block;
+    }
+    return block;
+}

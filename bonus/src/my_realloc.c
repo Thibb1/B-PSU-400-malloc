@@ -24,11 +24,18 @@ void *my_realloc(void *ptr, size_t size)
 
     ASSERT_RET_VAL(block->size < size, ptr);
     ASSERT_RET_VAL(block->next, grow_block(block, size));
-    new_ptr = my_malloc(size);
-    ASSERT_RET(new_ptr);
-    memcpy(new_ptr, ptr, size);
-    my_free(ptr);
-    return new_ptr;
+    if (block->next->free &&
+        (block->size + BLOCK_SIZE + block->next->size) >= size) {
+        fusion(block);
+        split_block(block, size);
+    } else {
+        new_ptr = my_malloc(size);
+        ASSERT_RET(new_ptr);
+        memcpy(new_ptr, ptr, size);
+        my_free(ptr);
+        return new_ptr;
+    }
+    return GET_DATA(block);
 }
 
 void *realloc(void *ptr, size_t size)

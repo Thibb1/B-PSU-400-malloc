@@ -13,8 +13,9 @@ void my_free(void *ptr)
 
     ASSERT(!block->free);
     block->free = 1;
-    if (*my_base() > block)
-        *my_base() = block;
+    if (block->prev && block->prev->free)
+        block = fusion(block->prev);
+    fusion(block);
 }
 
 void free(void *ptr)

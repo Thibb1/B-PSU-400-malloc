@@ -1,0 +1,11 @@
+*.out
+*.o
+*.txt
+*.gc*
+main.c
+.vscode
+test.c
+atest.c
+tests/*
+!tests/tests_my_memory.c
+unit_tests**#
